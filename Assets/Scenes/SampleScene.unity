@@ -1348,12 +1348,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 341547956}
   _speed: 5.2
-  _minDistance: 3
+  _minDistance: 10
   _maxStepHeight: 2
   _ground:
     serializedVersion: 2
     m_Bits: 128
   _footPosition: {x: 0, y: -1, z: 0}
+  _raycastLength: 1
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
