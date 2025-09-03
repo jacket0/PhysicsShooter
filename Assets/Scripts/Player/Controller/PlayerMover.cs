@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent (typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _speed = 5;
     [SerializeField] private float _strafeSpeed = 5;
@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController _controller;
     private Vector3 _verticalVelocity;
     private Vector3 _horizontalVelocity;
+    private bool _isJumped;
 
     private void Awake()
     {
@@ -24,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (_controller.isGrounded)
         {
-            _verticalVelocity = (Input.GetKeyDown(KeyCode.Space)) ? Vector3.up * _jumpSpeed : Vector3.down;
+            _verticalVelocity = _isJumped ? Vector3.up * _jumpSpeed : Vector3.down;
             _controller.Move((newPosition + _verticalVelocity) * Time.deltaTime);
         }
         else
@@ -35,4 +36,6 @@ public class PlayerMovement : MonoBehaviour
             _controller.Move((_verticalVelocity + _horizontalVelocity) * Time.deltaTime);
         }
     }
+
+    public void SetJumpFlag(bool isJumped) => _isJumped = isJumped;
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class InputReader : MonoBehaviour
@@ -9,4 +10,17 @@ public class InputReader : MonoBehaviour
 
     public Vector3 InputDirection => new Vector3(Input.GetAxis(HorizontalAxis), 0, Input.GetAxis(VerticalAxis));
     public Vector3 MouseDirection => new Vector3(Input.GetAxis(HorizontalMouseAxis), Input.GetAxis(VerticalMouseAxis), 0);
+
+    public event Action PlayerShooted;
+    public event Action<bool> PlayerJumped;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            PlayerShooted?.Invoke();
+        }
+
+        PlayerJumped?.Invoke(Input.GetKeyDown(KeyCode.Space));
+    }
 }
